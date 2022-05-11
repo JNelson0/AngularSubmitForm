@@ -1,0 +1,26 @@
+<table [class.d-none]="isUser === false" class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Subscription</th>
+            <th scope="col">Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>
+                {{ user.name }}
+            </td>
+            <td>
+                {{ user.email }}
+            </td>
+            <td>
+                {{ user.subscription }}
+            </td>
+            <td>
+                {{ user.createdAt }}
+            </td>
+        </tr>
+    </tbody>
+</table>
