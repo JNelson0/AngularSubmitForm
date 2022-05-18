@@ -1,19 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+import { throwError } from "rxjs";
+import { FormGroup } from "@angular/forms";
 @Injectable({
-    providedIn: 'root',
+    providedIn: "root",
 })
 export class UserRegisterService {
-    url = 'http://localhost:8080';
+    url = "http://localhost:8080";
 
     constructor(private http: HttpClient) {}
     register(user: FormGroup) {
-        return this.http
-            .post<any>(`${this.url}/user`, user)
-            .pipe(catchError((error) => this.handleError(error)));
+        return this.http.post<any>(`${this.url}/user`, user).pipe(
+            catchError((error) => {
+                return throwError(() => error);
+            })
+        );
     }
 
     getUsers() {
