@@ -41,7 +41,7 @@ jobs:
       - name: Test
         run: |
           cd client
-          yarn test
+          yarn test:prod
 
   deploy:
         runs-on: ubuntu-latest
