@@ -60,6 +60,13 @@ jobs:
             - run: |
                 cd server
                 
+            - name: deploy client to Docker
+              uses: docker/build-push-action@v2
+              with:
+                  file: ./client/Dockerfile
+                  push: true
+                  tags: jnelson1/client-image:latest
+                
             - name: deploy prisma to Docker
               uses: docker/build-push-action@v2
               with:
@@ -67,11 +74,6 @@ jobs:
                   push: true
                   tags: jnelson1/prisma-image:latest
                   
-            - name: deploy client to Docker
-              uses: docker/build-push-action@v2
-              with:
-                  file: ./client/Dockerfile
-                  push: true
-                  tags: jnelson1/client-image:latest
+            
                   
             
