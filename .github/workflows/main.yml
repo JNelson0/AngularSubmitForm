@@ -32,10 +32,12 @@ jobs:
         
       - name: Install dependencies
         run: yarn install
-        
+      - name: Navigate to ./client
+        run: cd client
       - name: Build
         run: yarn run build
-        
+      - name: Navigate to ./client
+        run: cd client
       - name: Test
         run: yarn run test
 
