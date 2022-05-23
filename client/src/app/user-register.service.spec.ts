@@ -17,10 +17,11 @@ describe("UserRegisterService", () => {
         expect(service).toBeTruthy();
     });
 
-    it("getUsers should return object", (done: DoneFn) => {
-        service.getUsers().subscribe((value) => {
-            expect(typeof value).toBe("object");
-            done();
-        });
-    });
+    // it("getUsers should return object", (done: DoneFn) => {
+    //     service.getUsers().subscribe((value) => {
+    //         expect(typeof value).toBe("object");
+    //         done();
+    //     });
+
+    // });
 });
