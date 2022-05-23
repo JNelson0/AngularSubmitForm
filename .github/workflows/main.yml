@@ -32,7 +32,9 @@ jobs:
           cd client
           yarn install
 
- 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        
       - name: Build
         run: |
           cd client
