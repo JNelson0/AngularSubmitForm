@@ -28,13 +28,22 @@ jobs:
       - uses: actions/setup-node@v3
       
       - name: Install dependencies
-        run: yarn install
+        uses: ./
+        with:
+          file: ./client
+          run: yarn install
  
       - name: Build
-        run: yarn run build-client
+        uses: ./
+        with:
+          file: ./client
+          run: yarn build
  
       - name: Test
-        run: yarn run test-client
+        uses: ./
+        with:
+          file: ./client
+          run: yarn run test
 
   deploy:
         runs-on: ubuntu-latest
