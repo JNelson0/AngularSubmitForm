@@ -30,9 +30,7 @@ services:
 
     prisma-postgres-api:
         stdin_open: true
-        build:
-            context: ./server
-            dockerfile: Dockerfile
+        image: jnelson1/prisma-image:latest
         container_name: prisma-postgres-api
         depends_on:
             - postgres
@@ -41,14 +39,12 @@ services:
         restart: always
 
     app:
-        build:
-            context: ./client
-            dockerfile: Dockerfile
+        image: jnelson1/client-image:latest
         container_name: angular-application
         depends_on:
             - prisma-postgres-api
         ports:
-            - "4200:4200"
+            - 4200:80
         restart: always
 
 volumes:
