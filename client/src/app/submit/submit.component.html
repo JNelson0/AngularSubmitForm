@@ -147,9 +147,9 @@
             />
             <small
                 [class.d-none]="
-                    passwordConfirm.valid ||
-                    passwordConfirm.untouched ||
-                        password.value == passwordConfirm.value
+                    (passwordConfirm.value === password.value &&
+                        password.valid) ||
+                    passwordConfirm.untouched
                 "
                 class="text-danger"
                 >Passwords do not match!</small
