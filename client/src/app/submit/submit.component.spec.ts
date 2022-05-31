@@ -109,4 +109,33 @@ describe("SubmitComponent", () => {
         errors = password.value == passwordConfirm.value;
         expect(errors).toBeTruthy();
     });
+
+    it("check formGroup getters and testUserForm", () => {
+        let name = component.userForm.controls["name"];
+        name.setValue("name");
+        expect(component.name?.value).toEqual("name");
+
+        let email = component.userForm.controls["email"];
+        email.setValue("email@email.com");
+        expect(component.email?.value).toEqual("email@email.com");
+
+        let subscription = component.userForm.controls["subscription"];
+        subscription.setValue("Advanced");
+        expect(component.subscription?.value).toEqual("Advanced");
+
+        let password = component.userForm.controls["password"];
+        password.setValue("Password!");
+        expect(component.password?.value).toEqual("Password!");
+
+        let passwordConfirm = component.userForm.controls["passwordConfirm"];
+        passwordConfirm.setValue("Password!");
+        expect(component.passwordConfirm?.value).toEqual("Password!");
+
+        expect(component.testUserForm()).toBeTruthy();
+    });
+
+    it("handleSubmit should make errorMessage true if form is not complete", () => {
+        component.handleSubmit();
+        expect(component.errorMessage).toBeTruthy();
+    });
 });

@@ -8,7 +8,8 @@ import { FormBuilder, Validators } from "@angular/forms";
     styleUrls: ["./submit.component.scss"],
 })
 export class SubmitComponent implements OnInit {
-    errorMessage: any | undefined;
+    errorMessage = false;
+    emailError = false;
 
     constructor(
         private userRegisterService: UserRegisterService,
@@ -16,7 +17,7 @@ export class SubmitComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {}
-    emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
+    emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
     passwordPattern = "(?=.*[!-+])(?=.*[a-z])(?=.*[A-Z]).{8,}";
     userForm = this.fb.group({
         name: ["", Validators.required],
@@ -57,7 +58,8 @@ export class SubmitComponent implements OnInit {
                     this.refreshTable();
                 },
                 error: (error) => {
-                    console.log(error);
+                    this.emailError = true;
+                    this.errorMessage = true;
                 },
                 complete: () => this.userForm.reset(),
             });
@@ -78,6 +80,8 @@ export class SubmitComponent implements OnInit {
         if (confirm("Are you sure you want to clear?")) {
             this.userForm.reset();
             this.errorMessage = false;
+            this.emailError = false;
+            this.userForm.controls["subscription"].setValue("Advanced");
         }
     }
 

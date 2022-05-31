@@ -11,21 +11,18 @@ export class UserRegisterService {
 
     constructor(private http: HttpClient) {}
     register(user: FormGroup) {
-        return this.http.post<any>(`${this.url}/user`, user).pipe(
-            catchError((error) => {
-                return throwError(() => error);
-            })
-        );
+        return this.http
+            .post<JSON>(`${this.url}/user`, user)
+            .pipe(catchError(this.handleError));
     }
 
     getUsers() {
         return this.http
-            .get(`${this.url}/users`)
+            .get<JSON>(`${this.url}/users`)
             .pipe(catchError(this.handleError));
     }
 
-    handleError(error: HttpErrorResponse) {
-        console.log(error);
+    handleError(error: any) {
         return throwError(() => error);
     }
 }

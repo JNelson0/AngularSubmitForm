@@ -9,12 +9,16 @@
                 email.invalid ||
                 subscription.invalid ||
                 password.invalid ||
-                passwordConfirm.invalid)
+                passwordConfirm.invalid ||
+                emailError)
         "
     >
         <small [class.d-none]="name.valid" class="text-danger"
             >- Name is required
         </small>
+        <small [class.d-none]="!emailError" class="text-danger"
+            >- Email already taken</small
+        >
         <small [class.d-none]="email.valid" class="text-danger"
             >- Email is required and must be format default@example.com</small
         >
@@ -64,6 +68,9 @@
                 name="email"
                 placeholder="default@example.com"
             />
+            <small *ngIf="emailError" class="text-danger"
+                >Email already taken</small
+            >
             <div *ngIf="email.invalid && (email.touched || errorMessage)">
                 <small *ngIf="email.errors?.['required']" class="text-danger"
                     >Email Required</small
@@ -130,9 +137,9 @@
             <input
                 formControlName="passwordConfirm"
                 [class.is-invalid]="
-                    (password.value != passwordConfirm.value &&
-                        passwordConfirm.touched) ||
-                    (errorMessage && passwordConfirm.invalid)
+                    (password.value != passwordConfirm.value ||
+                        password.invalid) &&
+                    (passwordConfirm.touched || errorMessage)
                 "
                 [class.is-valid]="
                     password.value == passwordConfirm.value &&
@@ -149,7 +156,7 @@
                 [class.d-none]="
                     (passwordConfirm.value === password.value &&
                         password.valid) ||
-                    passwordConfirm.untouched
+                    (passwordConfirm.untouched && !errorMessage)
                 "
                 class="text-danger"
                 >Passwords do not match!</small
